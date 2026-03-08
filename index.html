@@ -293,8 +293,10 @@
                 </div>
             </div>
             <div class="contact-form-wrapper shadow-lg slide-in-right">
-                <form id="booking-form" class="contact-form"
-                    onsubmit="event.preventDefault(); alert('Booking form submitted successfully! We will contact you soon.');">
+                
+                <!-- <form id="booking-form" class="contact-form"
+                    onsubmit="event.preventDefault(); alert('Booking form submitted successfully! We will contact you soon.');"> -->
+                <form id="booking-form" class="contact-form">   
                     <div class="form-group">
                         <input type="text" id="name" required placeholder="Full Name">
                     </div>
@@ -338,6 +340,43 @@
     </a>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+
+(function(){
+emailjs.init("ramzancourse1@gmail.com");
+})();
+
+document.getElementById("booking-form").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+emailjs.send("service_feok6oc","template_1bimi4r",{
+
+name: document.getElementById("name").value,
+phone: document.getElementById("phone").value,
+date: document.getElementById("date").value,
+service: document.getElementById("service").value,
+message: document.getElementById("message").value
+
+})
+
+.then(function(response){
+
+alert("Booking request sent successfully!");
+
+document.getElementById("booking-form").reset();
+
+}, function(error){
+
+alert("Failed to send booking. Please try again.");
+
+});
+
+});
+
+</script>
 </body>
 
 </html>
